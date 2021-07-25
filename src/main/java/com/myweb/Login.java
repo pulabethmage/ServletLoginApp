@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.myweb.dao.LoginDao;
+
 @WebServlet("/Login")
 public class Login extends HttpServlet {
        
@@ -20,7 +22,10 @@ public class Login extends HttpServlet {
 	String username = req.getParameter("uname");
 	String password = req.getParameter("pass");
 	
-	if(username.equals("pula") && password.equals("123"))
+	
+	LoginDao logindao = new LoginDao();
+	
+	if(logindao.checkCredentials(username, password))
 	{
 		HttpSession session = req.getSession();
 		session.setAttribute("username", username);
